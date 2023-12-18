@@ -1,8 +1,22 @@
-import logo from "./logo.svg";
-import "./App.css";
+import { useState } from "react";
 
 function App() {
-  return <div>My APP</div>;
+  const [name, setName] = useState("");
+  const [data, setData] = useState("");
+
+  return (
+    <div>
+      <h1>Event testing</h1>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <br />
+      {data}
+      <button onClick={(e) => setData("updated data")}>Update Date</button>
+    </div>
+  );
 }
 
 export default App;
