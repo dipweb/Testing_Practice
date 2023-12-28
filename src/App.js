@@ -4,14 +4,7 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <p>First Testing App </p>
-
-      <input type="text" placeholder="Enter User Name" name="userName" />
-      <br />
-      <img
-        title="Book Image"
-        src="https://www.wakeupbooks.in/wp-content/uploads/2022/11/My-Book-of-facts.png"
-      />
+      <p>Snapshot Testing App </p>
     </div>
   );
 }
