@@ -1,44 +1,26 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
+import getData from "./api";
 
-test("renders learn react link", () => {
+test("testing -- for is My First App rendered", () => {
   render(<App />);
-  const title = screen.getByTitle("Book Image");
-  const linkElement = screen.getByText(/First Testing App/i);
-  expect(linkElement).toBeInTheDocument();
-  expect(title).toBeInTheDocument();
+  let text = screen.getByText("First Testing App");
+  expect(text).toBeInTheDocument();
 });
-
-test("testing Input box", () => {
+test("testing -- post rendered or not", async () => {
   render(<App />);
-  let checkInput = screen.getByRole("textbox");
-  let checkPlaceHolder = screen.getByPlaceholderText("Enter User Name");
-  expect(checkInput).toBeInTheDocument();
-  expect(checkPlaceHolder).toBeInTheDocument();
-  expect(checkInput).toHaveAttribute("name", "userName");
-});
-
-describe("UI test Sets", () => {
-  test("UI test 1", () => {
-    render(<App />);
-    let checkInput = screen.getByRole("textbox");
-    expect(checkInput).toBeInTheDocument();
+  window.fetch = jest.fn();
+  window.fetch.mockResolvedValueOnce({
+    json: async () => [
+      {
+        userId: 1,
+        id: 1,
+        title:
+          "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
+      },
+    ],
   });
-  test("UI test 2", () => {
-    render(<App />);
-    let checkInput = screen.getByRole("textbox");
-    expect(checkInput).toBeInTheDocument();
-  });
-});
-describe.only("UI test Sets", () => {
-  test("UI test 1", () => {
-    render(<App />);
-    let checkInput = screen.getByRole("textbox");
-    expect(checkInput).toBeInTheDocument();
-  });
-  test("UI test 2", () => {
-    render(<App />);
-    let checkInput = screen.getByRole("textbox");
-    expect(checkInput).toBeInTheDocument();
-  });
+  const list = await screen.findAllByRole("listitem");
+  expect(list).not.toHaveLength(0);
 });

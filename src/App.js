@@ -1,17 +1,21 @@
-import logo from "./logo.svg";
-import "./App.css";
+import { useEffect, useState } from "react";
+import getData from "./api";
 
 function App() {
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    getData().then((res) => {
+      setPosts(res);
+    });
+  }, []);
   return (
-    <div className="App">
+    <div>
       <p>First Testing App </p>
-
-      <input type="text" placeholder="Enter User Name" name="userName" />
-      <br />
-      <img
-        title="Book Image"
-        src="https://www.wakeupbooks.in/wp-content/uploads/2022/11/My-Book-of-facts.png"
-      />
+      <ul>
+        {posts.map((post) => {
+          return <li key={post.id}>{post.title}</li>;
+        })}
+      </ul>
     </div>
   );
 }
